@@ -25,7 +25,7 @@ Requisitos: Docker con Docker Compose v2 (en Windows, Docker Desktop con WSL 2; 
 del curso), al menos 4 GB de memoria para Docker y los puertos 8000, 5000 y 8080 libres.
 
 ```bash
-git clone https://github.com/<usuario>/novamercado-pronostico.git
+git clone https://github.com/robinsonlopez-galileo/novamercado-pronostico.git
 cd novamercado-pronostico
 git checkout entrega-lab2
 
