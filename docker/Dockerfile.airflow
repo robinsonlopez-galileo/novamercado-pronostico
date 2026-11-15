@@ -1,0 +1,12 @@
+# Airflow 3.3.2 con el código del producto. El DAG y el paquete novamercado viajan dentro de la
+# imagen (no se montan desde la laptop): así la versión que corre es la del tag entregado.
+FROM apache/airflow:3.3.2-python3.12
+
+COPY docker/requirements-airflow.txt docker/constraints-airflow-3.3.2-python3.12.txt /tmp/
+RUN pip install --no-cache-dir "apache-airflow==3.3.2" \
+        -r /tmp/requirements-airflow.txt \
+        --constraint /tmp/constraints-airflow-3.3.2-python3.12.txt
+
+COPY --chown=airflow:root src/ /opt/novamercado/src/
+COPY --chown=airflow:root dags/ /opt/airflow/dags/
+ENV PYTHONPATH=/opt/novamercado/src
