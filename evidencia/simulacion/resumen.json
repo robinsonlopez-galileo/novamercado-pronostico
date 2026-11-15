@@ -1,0 +1,61 @@
+{
+  "periodo": "2026-01-01 a 2026-02-28",
+  "predicciones": 7080,
+  "costo_total": 182893.5,
+  "costo_por_registro": 25.832,
+  "wape": 0.1807,
+  "costo_por_version": {
+    "1": 25.245,
+    "4": 26.632
+  },
+  "respuestas": {
+    "observacion 200 advertencia": 38,
+    "observacion 200 corregido": 116,
+    "observacion 200 ok": 436,
+    "prediccion 200 advertencia": 29,
+    "prediccion 200 corregido": 136,
+    "prediccion 200 ok": 425
+  },
+  "reentrenamientos": [
+    {
+      "fecha_simulada": "2026-01-14",
+      "status": 202,
+      "id": "manual__2026-11-15T14:57:43.804306+00:00",
+      "estado": "exitoso",
+      "promovido": false,
+      "version": "1",
+      "motivo": "Costo en validación 103 450 vs 104 359 del vigente: mejora menor que 1%",
+      "duracion_s": 35
+    },
+    {
+      "fecha_simulada": "2026-01-28",
+      "status": 202,
+      "id": "manual__2026-11-15T14:58:47.070043+00:00",
+      "estado": "exitoso",
+      "promovido": true,
+      "version": "4",
+      "motivo": "Costo en validación 86 768 vs 89 643 del vigente",
+      "duracion_s": 30
+    },
+    {
+      "fecha_simulada": "2026-02-11",
+      "status": 202,
+      "id": "manual__2026-11-15T14:59:44.861765+00:00",
+      "estado": "exitoso",
+      "promovido": false,
+      "version": "4",
+      "motivo": "Costo en validación 86 764 vs 87 031 del vigente: mejora menor que 1%",
+      "duracion_s": 35
+    },
+    {
+      "fecha_simulada": "2026-02-25",
+      "status": 202,
+      "id": "manual__2026-11-15T15:00:46.958984+00:00",
+      "estado": "exitoso",
+      "promovido": true,
+      "version": "6",
+      "motivo": "Costo en validación 85 796 vs 86 858 del vigente",
+      "duracion_s": 30
+    }
+  ]
+}

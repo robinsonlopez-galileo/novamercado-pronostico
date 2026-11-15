@@ -1,0 +1,22 @@
+{
+  "fin_entrenamiento": "2025-12-03",
+  "periodo": "2026-01-01 a 2026-02-28",
+  "perfil": {
+    "costo": 289001.6,
+    "costo_por_registro": 40.819,
+    "mae": 59.716,
+    "rmse": 111.118,
+    "wape": 0.294,
+    "sesgo": 0.087,
+    "n": 7080.0
+  },
+  "boosting": {
+    "costo": 180894.8,
+    "costo_por_registro": 25.55,
+    "mae": 36.474,
+    "rmse": 67.33,
+    "wape": 0.179,
+    "sesgo": -0.01,
+    "n": 7080.0
+  }
+}
