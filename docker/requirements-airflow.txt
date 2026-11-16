@@ -1,0 +1,13 @@
+# Dependencias que se agregan a la imagen oficial de Airflow 3.3.2 (Python 3.12).
+# Se instalan con las restricciones oficiales de Airflow (constraints-airflow-3.3.2-python3.12.txt)
+# para no romper sus dependencias. Mismas versiones que la API.
+apache-airflow-providers-fab==3.9.0
+apache-airflow-providers-standard==1.19.0
+psycopg[binary]==3.3.5
+SQLAlchemy==2.0.52
+pandas==3.0.5
+numpy==2.5.3
+scikit-learn==1.9.1
+joblib==1.6.0
+mlflow-skinny==3.17.2
+requests==2.34.2

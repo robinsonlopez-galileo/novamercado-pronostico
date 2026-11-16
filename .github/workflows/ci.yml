@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pruebas:
+    name: Pruebas (pytest, sin MLflow ni Docker)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: docker/requirements-*.txt
+      - name: Instalar dependencias
+        run: pip install -r docker/requirements-dev.txt
+      - name: Estilo (ruff)
+        run: ruff check src tests dags scripts
+      - name: Pruebas
+        run: python -m pytest -q
+
+  dag-airflow:
+    name: DAG compatible con Airflow 3.3.2
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: docker/requirements-airflow.txt
+      - name: Instalar Airflow con sus restricciones oficiales
+        run: >
+          pip install "apache-airflow==3.3.2" -r docker/requirements-airflow.txt
+          --constraint docker/constraints-airflow-3.3.2-python3.12.txt
+      - name: Importar el DAG y verificar su estructura
+        env:
+          AIRFLOW_HOME: ${{ runner.temp }}/airflow
+          AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+          PYTHONPATH: src
+        run: python scripts/verificar_dag.py
+
+  docker:
+    name: Compose e imágenes
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar docker-compose.yml con .env.example
+        run: cp .env.example .env && docker compose config --quiet
+      - name: Construir imagen de la API
+        run: docker build -f docker/Dockerfile.api -t novamercado-api:ci .
+      - name: Construir imagen de Airflow
+        run: docker build -f docker/Dockerfile.airflow -t novamercado-airflow:ci .
+      - name: La imagen de la API importa el servicio
+        run: docker run --rm novamercado-api:ci python -c "import novamercado.api.main, novamercado.inicializar; print('ok')"

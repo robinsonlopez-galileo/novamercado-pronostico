@@ -1,0 +1,32 @@
+# Imagen de la API y del inicializador. El modelo NO va dentro de la imagen: se descarga del
+# Model Registry (@champion) y se guarda en un volumen de caché.
+FROM python:3.12.11-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src
+
+WORKDIR /app
+
+# 1. Dependencias primero: la capa pesada queda en caché entre construcciones.
+COPY docker/requirements-api.txt .
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+# 2. Código al final.
+COPY src/ src/
+
+# 3. Sin privilegios. La caché del modelo pertenece al usuario de la app.
+RUN useradd --create-home --uid 10001 app \
+    && mkdir -p /app/cache_modelo \
+    && chown -R app /app/cache_modelo
+USER app
+
+EXPOSE 8000
+
+# La imagen slim no trae curl: la salud se consulta con Python. Cualquier respuesta HTTP
+# (incluida 'degradado') indica que el proceso vive; 503 mientras no hay modelo.
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=5 \
+    CMD python -c "import urllib.request as u; u.urlopen('http://localhost:8000/health', timeout=4)"
+
+CMD ["uvicorn", "novamercado.api.main:app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
