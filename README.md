@@ -22,22 +22,61 @@ mejora su modelo de forma automática. Todo se levanta con un comando.
 ## Levantar el producto desde cero
 
 Requisitos: Docker con Docker Compose v2 (en Windows, Docker Desktop con WSL 2; ver la guía
-del curso), al menos 4 GB de memoria para Docker y los puertos 8000, 5000 y 8080 libres.
+del curso), al menos 4 GB de memoria para Docker y los puertos 8000, 5000 y 8080 libres. No
+hace falta Python en la máquina: todo corre en contenedores.
+
+### Paso 1 · Clonar la versión entregada
 
 ```bash
 git clone https://github.com/robinsonlopez-galileo/novamercado-pronostico.git
 cd novamercado-pronostico
 git checkout entrega-lab2
+```
 
-# 1. Datos: copiar los archivos publicados en la carpeta datos/
-#    datos/tiendas.csv, familias.csv, historico_ventas.csv, feriados.csv, costos.csv
-#    (catalogo_errores.md y ejemplos/ son opcionales)
+### Paso 2 · Colocar los archivos publicados en la carpeta `datos/`
 
-# 2. Credenciales
-cp .env.example .env      # y cambiar las claves
+Los archivos que el equipo docente publica en el GES van en la carpeta **`datos/`, en la raíz
+del repositorio** (junto a `docker-compose.yml`), descomprimidos y **sin subcarpetas
+intermedias**:
 
-# 3. Construir y levantar
+```
+novamercado-pronostico/
+├── docker-compose.yml
+└── datos/                      ← aquí
+    ├── tiendas.csv             (obligatorio)
+    ├── familias.csv            (obligatorio)
+    ├── historico_ventas.csv    (obligatorio)
+    ├── feriados.csv            (obligatorio)
+    ├── costos.csv              (obligatorio)
+    ├── catalogo_errores.md     (opcional, solo documentación)
+    ├── ejemplos/               (opcional, solo documentación)
+    └── LEEME.md                (ya viene en el repositorio)
+```
+
+Por ejemplo, si el archivo publicado es `datos_lab2.zip`:
+
+```bash
+unzip datos_lab2.zip -d datos/   # en Windows también sirve «Extraer todo» del Explorador hacia datos\
+ls datos/                        # deben verse los cinco .csv directamente, no una carpeta adentro
+```
+
+Si el zip trae una carpeta interna (por ejemplo `datos/datos_lab2/tiendas.csv`), mueva los
+archivos un nivel arriba. Docker Compose monta `./datos` en `/datos` en **solo lectura** en el
+inicializador, la API y Airflow; si falta algún archivo obligatorio, el servicio `inicializador`
+termina con el mensaje «Faltan archivos en /datos» y la lista de los que faltan. El contenido de
+`datos/` está en `.gitignore`: los datos no forman parte del repositorio ni de las imágenes.
+
+### Paso 3 · Credenciales
+
+```bash
+cp .env.example .env      # y cambiar las claves (las de ejemplo también funcionan para probar)
+```
+
+### Paso 4 · Construir y levantar
+
+```bash
 docker compose up -d --build
+docker compose ps -a      # servicios en running/healthy; el inicializador termina en Exited (0)
 ```
 
 Al levantarse desde cero, el servicio `inicializador` carga el histórico en la base del
@@ -148,9 +187,19 @@ imágenes. Cada cambio entra a `main` por Pull Request.
 ├── scripts/                   simulación, evidencia y verificación del DAG
 ├── datos/                     archivos publicados (no se versionan)
 ├── evidencia/
-├── README.md · DECISIONES.md · GUIA_DESARROLLO.md
+├── README.md · DECISIONES.md · AGENTS.md
 └── .env.example
 ```
+
+## Documentación
+
+| Archivo | Contenido |
+|---|---|
+| `README.md` | Este archivo: cómo levantar, usar y verificar el producto desde cero. |
+| [`DECISIONES.md`](DECISIONES.md) | Decisiones técnicas y de producto con sus alternativas y su justificación: política ante cada tipo de problema en los datos, información que usa el modelo al predecir, cantidad sugerida y criterio de reemplazo del modelo. |
+| [`AGENTS.md`](AGENTS.md) | Archivo de contexto para el agente de programación: producto, estructura, comandos y reglas del proyecto. |
+| [`datos/LEEME.md`](datos/LEEME.md) | Qué archivos van en `datos/`. |
+| [`evidencia/`](evidencia/) | Resultados de ejecutar el producto completo. |
 
 ## Problemas frecuentes
 
@@ -162,4 +211,8 @@ imágenes. Cada cambio entra a `main` por Pull Request.
 | `POST /admin/reentrenar` responde 503 | Airflow aún está arrancando; reintentar en un minuto. |
 | Puerto ocupado | Liberar 8000, 5000 u 8080, o cambiar el puerto publicado en `docker-compose.yml`. |
 
-Integrantes: Robinson René López Hidalgo (26007448).
+## Autoría
+
+Robinson René López Hidalgo (26007448). Desarrollado con apoyo de Claude Code como agente de
+programación, uso que el enunciado permite; las decisiones y la verificación del código son
+responsabilidad del estudiante.
