@@ -1,0 +1,96 @@
+[
+  {
+    "version": "1",
+    "alias": [],
+    "creada": "2026-11-15T08:56:38",
+    "run": "inicial-boosting",
+    "decision": "promovido",
+    "motivo": "Costo en validación 113 713; no había modelo vigente comparable",
+    "tipo": "boosting",
+    "fin_entrenamiento": "2025-12-03",
+    "ventana_evaluacion": "2025-12-04 a 2025-12-31",
+    "huella_datos": "cad8067f4a47111b",
+    "costo_validacion": 113712.6,
+    "baseline_costo_validacion": 165097.7,
+    "wape_validacion": 0.1839174238279323
+  },
+  {
+    "version": "2",
+    "alias": [],
+    "creada": "2026-11-15T08:56:41",
+    "run": "inicial-baseline-perfil",
+    "decision": "respaldo (baseline)",
+    "motivo": null,
+    "tipo": "perfil",
+    "fin_entrenamiento": "2025-12-03",
+    "ventana_evaluacion": "2025-12-04 a 2025-12-31",
+    "huella_datos": "cad8067f4a47111b",
+    "costo_validacion": 165097.7,
+    "baseline_costo_validacion": null,
+    "wape_validacion": 0.25495847198428573
+  },
+  {
+    "version": "3",
+    "alias": [],
+    "creada": "2026-11-15T08:58:07",
+    "run": "reentrenamiento-2026-11-15T145743-boosting",
+    "decision": "descartado",
+    "motivo": "Costo en validación 103 450 vs 104 359 del vigente: mejora menor que 1%",
+    "tipo": "boosting",
+    "fin_entrenamiento": "2025-12-16",
+    "ventana_evaluacion": "2025-12-17 a 2026-01-13",
+    "huella_datos": "08c7a9447b98115b",
+    "costo_validacion": 103450.0,
+    "baseline_costo_validacion": 200352.80000000002,
+    "wape_validacion": 0.18978969193935777
+  },
+  {
+    "version": "4",
+    "alias": [
+      "anterior"
+    ],
+    "creada": "2026-11-15T08:59:06",
+    "run": "reentrenamiento-2026-11-15T145847-boosting",
+    "decision": "promovido",
+    "motivo": "Costo en validación 86 768 vs 89 643 del vigente",
+    "tipo": "boosting",
+    "fin_entrenamiento": "2025-12-30",
+    "ventana_evaluacion": "2025-12-31 a 2026-01-27",
+    "huella_datos": "32e16a08eb8dabf0",
+    "costo_validacion": 86767.5,
+    "baseline_costo_validacion": 207510.0,
+    "wape_validacion": 0.18607444235621814
+  },
+  {
+    "version": "5",
+    "alias": [],
+    "creada": "2026-11-15T09:00:07",
+    "run": "reentrenamiento-2026-11-15T145944-boosting",
+    "decision": "descartado",
+    "motivo": "Costo en validación 86 764 vs 87 031 del vigente: mejora menor que 1%",
+    "tipo": "boosting",
+    "fin_entrenamiento": "2026-01-13",
+    "ventana_evaluacion": "2026-01-14 a 2026-02-10",
+    "huella_datos": "05a47fb2a9e50c95",
+    "costo_validacion": 86763.5,
+    "baseline_costo_validacion": 130272.9,
+    "wape_validacion": 0.17507741927101006
+  },
+  {
+    "version": "6",
+    "alias": [
+      "champion"
+    ],
+    "creada": "2026-11-15T09:01:07",
+    "run": "reentrenamiento-2026-11-15T150046-boosting",
+    "decision": "promovido",
+    "motivo": "Costo en validación 85 796 vs 86 858 del vigente",
+    "tipo": "boosting",
+    "fin_entrenamiento": "2026-01-27",
+    "ventana_evaluacion": "2026-01-28 a 2026-02-24",
+    "huella_datos": "a86d8ad5982a2560",
+    "costo_validacion": 85795.70000000001,
+    "baseline_costo_validacion": 138488.80000000002,
+    "wape_validacion": 0.1711618788542834
+  }
+]

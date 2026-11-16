@@ -1,0 +1,62 @@
+[
+  {
+    "dag_run_id": "manual__2026-11-15T14:57:43.804306+00:00",
+    "estado_airflow": "success",
+    "inicio": "2026-11-15T14:57:44.174037Z",
+    "fin": "2026-11-15T14:58:18.479690Z",
+    "respuesta_api": {
+      "estado": "exitoso",
+      "promovido": false,
+      "version": "1",
+      "motivo": "Costo en validación 103 450 vs 104 359 del vigente: mejora menor que 1%"
+    }
+  },
+  {
+    "dag_run_id": "manual__2026-11-15T14:58:47.070043+00:00",
+    "estado_airflow": "success",
+    "inicio": "2026-11-15T14:58:47.552740Z",
+    "fin": "2026-11-15T14:59:15.712862Z",
+    "respuesta_api": {
+      "estado": "exitoso",
+      "promovido": true,
+      "version": "4",
+      "motivo": "Costo en validación 86 768 vs 89 643 del vigente"
+    }
+  },
+  {
+    "dag_run_id": "manual__2026-11-15T14:59:44.861765+00:00",
+    "estado_airflow": "success",
+    "inicio": "2026-11-15T14:59:45.732314Z",
+    "fin": "2026-11-15T15:00:16.994239Z",
+    "respuesta_api": {
+      "estado": "exitoso",
+      "promovido": false,
+      "version": "4",
+      "motivo": "Costo en validación 86 764 vs 87 031 del vigente: mejora menor que 1%"
+    }
+  },
+  {
+    "dag_run_id": "manual__2026-11-15T15:00:46.958984+00:00",
+    "estado_airflow": "success",
+    "inicio": "2026-11-15T15:00:47.035688Z",
+    "fin": "2026-11-15T15:01:17.192766Z",
+    "respuesta_api": {
+      "estado": "exitoso",
+      "promovido": true,
+      "version": "6",
+      "motivo": "Costo en validación 85 796 vs 86 858 del vigente"
+    }
+  },
+  {
+    "dag_run_id": "manual__2026-11-15T15:01:49.781909+00:00",
+    "estado_airflow": "failed",
+    "inicio": "2026-11-15T15:01:50.511423Z",
+    "fin": "2026-11-15T15:01:58.463269Z",
+    "respuesta_api": {
+      "estado": "fallido",
+      "promovido": false,
+      "version": "6",
+      "motivo": "La ejecución falló en la tarea planear; el modelo vigente no cambió"
+    }
+  }
+]
